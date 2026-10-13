@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenko - Creative Digital Agency</title>
+    
+    <style>
+        /* === RESET & BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* === NAVBAR STYLING === */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(11, 12, 16, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            color: #55e6a5;
+        }
+
+        .nav-links a {
+            color: #a9a9a9;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #ffffff;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-talk {
+            background-color: #55e6a5;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-talk:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* === HERO SECTION STYLING === */
+        .hero-section {
+            min-height: 100vh;
+            padding: 150px 8% 50px 8%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Green Glow Background Effect */
+        .glow-effect {
+            position: absolute;
+            top: -10%;
+            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(85, 230, 165, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Thin Grid Background Overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Typography Layout */
+        .hero-content {
+            width: 100%;
+            max-width: 1100px;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 50px;
+        }
+
+        .hero-text-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            margin-bottom: -10px;
+        }
+
+        .row-right {
+            justify-content: space-between;
+            flex-direction: row-reverse;
+            margin-top: -20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(48px, 8vw, 100px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        .title-right {
+            text-align: right;
+        }
+
+        .hero-description {
+            max-width: 380px;
+            color: #a9a9a9;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .hero-description strong {
+            color: #ffffff;
+        }
+
+        .cta-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-explore {
+            background: transparent;
+            color: #55e6a5;
+            border: 1px solid #55e6a5;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-explore:hover {
+            background: #55e6a5;
+            color: #000000;
+        }
+
+        /* === MEDIA SHOWCASE (LIVE IMAGE VIA INTERNET) === */
+        .showcase-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Applying grayscale like template design */
+            filter: grayscale(100%) brightness(70%);
+            transition: filter 0.5s ease;
+        }
+
+        .showcase-container:hover .showcase-img {
+            filter: grayscale(20%) brightness(80%);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 75px;
+            height: 75px;
+            background: #55e6a5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(85, 230, 165, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-icon {
+            color: #000000;
+            font-size: 22px;
+            margin-left: 5px;
+        }
+
+        /* === RESPONSIVE STYLES === */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-text-row, .row-right {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .title-right {
+                text-align: left;
+            }
+            
+            .showcase-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">▲</span> Agenko
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">Pages</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div class="nav-actions">
+            <button class="btn-talk">Let's Talk ↗</button>
+            <div class="menu-icon">☰</div>
+        </div>
+    </header>
+
+    <!-- Main Hero Content -->
+    <main class="hero-section">
+        <div class="grid-overlay"></div>
+        <div class="glow-effect"></div>
+
+        <div class="hero-content">
+            <!-- First Row: Title Left, Text Right -->
+            <div class="hero-text-row">
+                <h1 class="title-left">CREATIVE</h1>
+                <p class="hero-description">
+                    We are a <strong>Creative Agency</strong> with over 10 years of experience, specializing in delivering cutting-edge digital solutions, branding and web design.
+                </p>
+            </div>
+            
+            <!-- Second Row: Button Left, Title Right -->
+            <div class="hero-text-row row-right">
+                <h1 class="title-right">AGENCY</h1>
+                <div class="cta-group">
+                    <button class="btn-explore">Learn More ↗</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video/Banner Section with Auto-loading Image Link -->
+        <div class="showcase-container">
+            <!-- This live link automatically pulls a high-quality office workspace photo from Unsplash -->
+            <img src="https://unsplash.com" alt="Creative Team Working" class="showcase-img">
+            <div class="play-button">
+                <div class="play-icon">▶</div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
